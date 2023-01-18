@@ -27,6 +27,7 @@
     </div>
 
     <script>
+        const producto = []
         var idArticulo;
         var artId;
         var i;
@@ -58,19 +59,30 @@
          function seleccion(){
 
             numeroSeleccionado = document.getElementById(idArticulo).value
-            console.log(numeroSeleccionado) ;
-            console.log('el id es: ' + idArticulo)           
+            // console.log(numeroSeleccionado) ;  // muestra el numero seleccionado
+            // console.log('el id es: ' + idArticulo) Muestra el numero id del articulo          
             
          }
+
             // funcion mostrar a que le hago click
          const contenedorclick = document.getElementById('contenedoArticulos');
         contenedorclick.addEventListener('click',(e) => {
             var objetoSelect = e.target.parentElement;
             var objetoSelectId = objetoSelect.querySelector('select').dataset.id;
             idArticulo = objetoSelectId
-                    console.log(objetoSelect)
-
-                })
+           
+            var comprar = e.target.classList.contains('btn');
+            
+            if ( comprar == true) {
+            producto.push({
+            id:objetoSelect.querySelector('.btn').dataset.id,
+            nArticulo:objetoSelect.querySelector('.articulo').textContent,
+            precio:objetoSelect.querySelector('.precio').textContent,
+            numero: numeroSeleccionado,
+            cantidad: '1' })
+            console.log(producto)
+            }
+        })
     </script>
 </body>
 </html>
