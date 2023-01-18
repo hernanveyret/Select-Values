@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Value Dinamicos</title>
+
+    <style>
+        
+        .cards {
+            border: 2px solid black;
+            width: 200px;
+            height: 200px;;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div id="contenedoArticulos">
+       
+    </div>
+
+    <script>
+        var idArticulo;
+        var artId;
+        var i;
+        let numeroSeleccionado;
+        let articulos = [
+            [1,128,19,26,1500,'art128/1'],
+            [2,128,27,33,2500,'art128/2'],
+            [3,320,34,40,3500,'art320']
+        ]
+
+        // crea tarjetas
+        for ( i = 0; i < articulos.length; i++) {
+            artId = articulos[i][5];
+        let html = ''            
+            html += `<section class="cards">`
+            html += `<p class="articulo">${articulos[i][1]}</p>`;     
+            html += `<select id="${artId}" data-id="${articulos[i][5]}" onchange="seleccion()">`;
+                    for ( let n = articulos[i][2]; n <= articulos[i][3]; n++) {
+                    html +=  ` <option value="${n}">Nº ${n}</option>`
+                        }
+            html += `</select>`;
+            html += `<p class="precio">${articulos[i][4]}</p>`;
+            html += `<button data-id="${articulos[i][0]}" class="btn">COMPRAR</button>`;
+            html += `<span id="nSeleccionado">Nº</span>`
+            html += `</section>`
+                        contenedoArticulos.innerHTML += html
+         }
+            // funcion seleccionar numeracion
+         function seleccion(){
+
+            numeroSeleccionado = document.getElementById(idArticulo).value
+            console.log(numeroSeleccionado) ;
+            console.log('el id es: ' + idArticulo)           
+            
+         }
+            // funcion mostrar a que le hago click
+         const contenedorclick = document.getElementById('contenedoArticulos');
+        contenedorclick.addEventListener('click',(e) => {
+            var objetoSelect = e.target.parentElement;
+            var objetoSelectId = objetoSelect.querySelector('select').dataset.id;
+            idArticulo = objetoSelectId
+                    console.log(objetoSelect)
+
+                })
+    </script>
+</body>
+</html>
